@@ -6,7 +6,6 @@ MIN_CONF = 0.3
 NMS_THRESH = 0.3
 
 MIN_DISTANCE = 50
-MODEL_PATH = "model_data"
 
 def detect_people(frame, net, ln):
 	
@@ -85,11 +84,10 @@ def detect_people(frame, net, ln):
 	# return the list of results
 	return results
 
-labelsPath = os.path.sep.join([MODEL_PATH, "coco_classes.txt"])
-LABELS = open(labelsPath).read().strip().split("\n")
+LABELS = open("yolov3_data/coco_classes.txt").read().strip().split("\n")
 
-weightsPath = os.path.sep.join([MODEL_PATH, "yolov3.weights"])
-configPath = os.path.sep.join([MODEL_PATH, "yolov3.cfg"])
+weightsPath =  "yolov3_data/yolov3.weights"
+configPath = "yolov3_data/yolov3.cfg"
 
 #Reads a network model stored in Darknet model file.
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
@@ -99,7 +97,7 @@ net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 # YOLOv3 predicts boxes at 3 different scales as illustrated in the below image.
 ln = net.getUnconnectedOutLayersNames()
 
-vs = cv2.VideoCapture(os.path.sep.join([MODEL_PATH,"Test_video_3.webm"]))
+vs = cv2.VideoCapture("demovideo/Test_video_3.webm")
 
 while True:
 
