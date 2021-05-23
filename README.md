@@ -21,8 +21,15 @@ Social Distance Detection using live video feed from camera or from recorded vid
 
 As social distance is one of the main criteria to follow in order to avoid spread of contagious disease. It is required to monitor the social distance at the important areas to avoid spreading virus. Since the covid-19 became a deadlier disease to be safe we need to maintain social distance and other precautions.
 ## Technical Aspect
+This project uses pre trained YoloV3 model for person detection the minimum confidence and non-maxima suppression thresehold are set by default. The recorded video or live feed are processed frame by frame, the distance between 2 person is the euclidean distance between their centroids and, they are used to calculate the violations of social distance. 
 ## Installation
+The Code is written in Python 3.7. If you don't have Python installed you should install it first. If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip. To install the required packages and libraries, run this command in the project directory after cloning the repository:
+```python
+pip install -r requirements.txt
+```
+Also as i mentioned before please download the model weights from the official website and save it inside the yolov3_data folder.
 ## Run
+- Run ```detection.py``` file set the argument of VideoCapture function(line 102) to 0 which takes input from the webcam, otherwise pass the location the demo videos from the demovideo folder as an argument to get the predictions. The predictions will be displayed using a cv2 window.
 ## Directory Tree
 ![Screenshot (89)](https://user-images.githubusercontent.com/49152921/119271834-edd3fb00-bc20-11eb-9d8b-43231ff6d7ff.png)
 
