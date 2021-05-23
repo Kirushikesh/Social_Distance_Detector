@@ -20,19 +20,8 @@
 ## Installation
 ## Run
 ## Directory Tree
-|   detection.py
-|   README.md
-|   requirements.txt
-|   
-+---demovideo
-|       Test_video_1.mp4
-|       Test_video_2.mp4
-|       Test_video_3.webm
-|       
-\---yolov3_data
-        coco_classes.txt
-        yolov3.weights
-        yolov3.cfg
+![Screenshot (89)](https://user-images.githubusercontent.com/49152921/119271834-edd3fb00-bc20-11eb-9d8b-43231ff6d7ff.png)
+
 ## Technologies and Tools
 - Python
 - Tensorflow
