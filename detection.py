@@ -2,9 +2,9 @@ import numpy as np
 import cv2
 from scipy.spatial import distance as dist
 import os 
+
 MIN_CONF = 0.3
 NMS_THRESH = 0.3
-
 MIN_DISTANCE = 50
 
 def detect_people(frame, net, ln):
