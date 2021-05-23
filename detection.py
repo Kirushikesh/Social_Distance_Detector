@@ -1,11 +1,13 @@
 import numpy as np
 import cv2
 from scipy.spatial import distance as dist
+import imutils
 import os 
 
 MIN_CONF = 0.3
 NMS_THRESH = 0.3
-MIN_DISTANCE = 50
+SERIOUS_DISTANCE = 50
+ALERT_DISTANCE = 80
 
 def detect_people(frame, net, ln):
 	
@@ -97,7 +99,7 @@ net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 # YOLOv3 predicts boxes at 3 different scales as illustrated in the below image.
 ln = net.getUnconnectedOutLayersNames()
 
-vs = cv2.VideoCapture("demovideo/Test_video_3.webm")
+vs = cv2.VideoCapture("demovideo/Test_video_1.mp4")
 
 while True:
 
@@ -105,12 +107,15 @@ while True:
 	if not grabbed:
 		break
 	
+	frame = imutils.resize(frame, width=700)
 	results = detect_people(frame, net, ln)
 	
 	# initialize the set of indexes that violate the minimum social
 	# distance
-	violate = set()
-	lines=list()
+	alert = set()
+	serious = set()
+	a_lines=list()
+	s_lines=list()
 
 	# ensure there are *at least* two people detections (required in
 	# order to compute our pairwise distance maps)
@@ -130,11 +135,15 @@ while True:
                 
 				# check to see if the distance between any two
                 # centroid pairs is less than the configured number of pixels
-				if D[i, j] < MIN_DISTANCE:
-                    
-					lines.append([centroids[i],centroids[j]])
-					violate.add(i)
-					violate.add(j)
+				if D[i, j] <= ALERT_DISTANCE:
+					if(D[i,j])<= SERIOUS_DISTANCE:
+						s_lines.append([centroids[i],centroids[j]])
+						serious.add(i)
+						serious.add(j)
+					else:
+						a_lines.append([centroids[i],centroids[j]])
+						alert.add(i)
+						alert.add(j)
 
     # loop over the results
 	for (i, (prob, bbox, centroid)) in enumerate(results):
@@ -147,20 +156,26 @@ while True:
 
 		# if the index pair exists within the violation set, then
 		# update the color
-		if i in violate:
+		if i in alert:
+			color = (0,255,255)
+		elif i in serious:
 			color = (0,0,255)
 		
 		# draw a bounding box around the person and the
 		# centroid coordinates of the person,
 		cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
 	
-	# draw connecting lines for violating people
-	for start,end in lines:
+	# draw connecting lines for violating alert people
+	for start,end in a_lines:
+		cv2.line(frame,start,end,(0,255,255),1)
+
+	# draw connecting lines for violating serious people
+	for start,end in s_lines:
 		cv2.line(frame,start,end,(0,0,255),1)
     
 	# draw the total number of social distancing violations on the
 	# output frame
-	text = "Social Distancing Violations: "+str(len(violate))
+	text = "Social Distancing Violations: "+str(len(serious)+len(alert))
 	cv2.putText(frame,text, (10, frame.shape[0] - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 0, 255), 3)
 	cv2.imshow("Frame",frame)
     
