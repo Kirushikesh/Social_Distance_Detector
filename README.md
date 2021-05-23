@@ -17,7 +17,7 @@
 ## Overview
 Social Distance Detection using live video feed from camera or from recorded video. This project was developed to suggest social distancing that everyone should follow among one another, reducing close contact, and thereby reducing the spread of a contagious disease (such as coronavirus). YOLOV3(You Only Look Once) pre-trained model is used for person detection. This project calculates different violation limits such as abnormal violation(yellow) and serious violation(red) of social distance. The group of people who violates the limits are joined one another using lines, and total no of violations on a particular frame is calculated. Since the Yolov3.weights cannot be uploaded in github due to size, but can be downloaded in official yolo website.
 ## Motivation
-![image](https://user-images.githubusercontent.com/49152921/119272428-66d45200-bc23-11eb-8e43-867a53b8e18f.png)
+![image](https://user-images.githubusercontent.com/49152921/119272523-f7ab2d80-bc23-11eb-9931-8ab95556544b.png)
 
 As social distance is one of the main criteria to follow in order to avoid spread of contagious disease. It is required to monitor the social distance at the important areas to avoid spreading virus. Since the covid-19 became a deadlier disease to be safe we need to maintain social distance and other precautions.
 ## Technical Aspect
