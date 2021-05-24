@@ -13,6 +13,8 @@
 - [References](#references)
 - [Contact](#contact)
 ## Demo
+![Animation2](https://user-images.githubusercontent.com/49152921/119293269-b17bbb80-bc6f-11eb-9682-00c1cfca4349.gif)
+
 ## Screen Shots
 ![Screenshot (91)](https://user-images.githubusercontent.com/49152921/119273107-f8918e80-bc26-11eb-8e6a-a838ea887534.png)
 ![Screenshot (93)](https://user-images.githubusercontent.com/49152921/119273169-3f7f8400-bc27-11eb-98d0-581d88e7f37f.png)
